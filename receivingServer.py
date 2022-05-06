@@ -40,13 +40,17 @@ def displayPicture():
 
 	# newImage = np.asarray(newImage, dtype = np.uint8)
 
+	# We save the image as a jpeg/png file first since there is no direct conversion from base64 to pixel matrix in python 3
 	with open(name, 'wb') as fh:
 		fh.write(base64.decodebytes(image))
 
+	# We now read the image file again by using the openCV library in order to display it
 	recImage = cv2.imread("./" + name)
 	
+	# This image is now a matrix of pixel values
 	print(recImage.shape)
 
+	# Resizing the image to fit in the laptop screen
 	recImage = cv2.resize(recImage, (512,512))
 
 	cv2.imshow('Received Image', recImage)
